@@ -7,16 +7,18 @@ int count = 4;
 int semFlag = 0;
 char semaphoreMutx[1000];
 sem_t FLAG;
+const char *cards[] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 
 void *diamond(void * array) {
 	int counterD = 0;
-	char *cardsD = (char *)array;
+	char* cardsD = array;
 	pthread_t tidD = pthread_self();
 
 	for (;;) {
 		sem_wait(&FLAG);
 		printf("Thread %d is running\n", tidD);	
-		fprintf(file, "Diamond %s\n", cardsD[counterD]);
+		fprintf(file, "Diamond %s\n", cards[counterD]);
+		fflush(file);
 		counterD++;
 		sem_post(&FLAG);
 		if (counterD > 12) {
@@ -35,7 +37,8 @@ void *club(void * array) {
 	for (;;) {
 		sem_wait(&FLAG);
 		printf("Thread %d is running\n", tidC);
-		fprintf(file, "Club %s\n", cardsC[counterC]);
+		fprintf(file, "Club %s\n", cards[counterC]);
+		fflush(file);
 		counterC++;
 		sem_post(&FLAG);
 		if (counterC > 12) {
@@ -54,7 +57,8 @@ void *heart(void * array) {
 	for (;;) {
 		sem_wait(&FLAG);
 		printf("Thread %d is running\n", tidH);
-		fprintf(file, "Heart %s\n", cardsH[counterH]);
+		fprintf(file, "Heart %s\n", cards[counterH]);
+		fflush(file);
 		counterH++;
 		sem_post(&FLAG);
 		if (counterH > 12) {
@@ -73,7 +77,8 @@ void *spade(void * array) {
 	for (;;) {
 		sem_wait(&FLAG);
 		printf("Thread %d is running\n", tidS);
-		fprintf(file, "Spade %s\n", cardsS[counterS]);
+		fprintf(file, "Spade %s\n", cards[counterS]);
+		fflush(file);
 		counterS++;
 		sem_post(&FLAG);
 		if (counterS > 12) {
@@ -86,7 +91,6 @@ void *spade(void * array) {
 
 int main(int argc, char *argv[]) {
         pthread_t diaThread, clubThread, heartThread, spadeThread;
-        const char *cards[] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
         diaFlag = clubFlag = heartFlag = spadeFlag = 0;
 
 	file = fopen("STACK.txt", "w");
