@@ -1,0 +1,17 @@
+Name: Denny Cao
+Class account: cssc1191
+Class info: CS570, Summer 2018
+Assignment: #3, Alarm
+Filename: tevent.c
+File manifest: Makefile, tevent.c, tevent.h
+Compile instructions: 'make' command
+Operating instructions: Run 'tevent' and a number to countdown from, no argument defaults to 25.
+			If entering something not an int, it will be converted to an int.
+			If less than 25, then it bumps it up to 25.
+
+The purpose of this program is to learn and to reaffirm the usage of fork() and threads. Bringing home
+the difference between the two and how to use both of those to perform 1 task.
+
+While straightforward, the process hit its biggest pitfall when dealing with pipe() as it's a new concept.
+While programming I noticed that while we could just have a global, pipes is useful when there might be
+multiple programs running or different files.

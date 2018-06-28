@@ -1,0 +1,1 @@
+Can go through all threads, but cannot fprintf as that causes a segmentation fault. Currently it's either go through threads or nothing as fprintf crashes the program.
